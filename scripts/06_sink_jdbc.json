@@ -7,5 +7,6 @@
   "topics": "LOCATION_EVENT",
   "auto.create": "true",
   "auto.evolve": "true",
-  "insert.mode": "insert"
+  "insert.mode": "insert",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter"
 }
