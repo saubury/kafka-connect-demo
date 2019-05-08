@@ -2,7 +2,13 @@
 
 ```
 ksql-datagen schema=./01_location_event.avro format=AVRO key=who maxInterval=5000 iterations=10000 topic=LOCATION_EVENT > /dev/null &
+
+ksql> run script '02_ksql.ksql';
+
+
 ```
+
+
 
 ```
 curl -X PUT \
