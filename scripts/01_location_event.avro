@@ -1,0 +1,66 @@
+{
+  "namespace": "streams",
+  "name": "location_event",
+  "type": "record",
+  "fields": [
+    {
+      "name": "event_time",
+      "type": {
+        "type": "long",
+        "format_as_time": "unix_long",
+        "arg.properties": {
+          "iteration": {
+            "start": 1,
+            "step": 10
+          }
+        }
+      }
+    },
+    {
+      "name": "latitude",
+      "type": {
+        "type": "double",
+        "arg.properties": {
+          "range": {"min": 37.7 , "max": 45.0}
+        }
+      }
+    },     
+    {
+      "name": "longitude",
+      "type": {
+        "type": "double",
+        "arg.properties": {
+          "range": {"min": -122.0, "max": -100.0}
+        }
+      }
+    },    
+    {
+      "name": "who",
+      "type": {
+        "type": "string",
+        "arg.properties": {
+          "options": [
+            "Alice",
+            "Bob",
+            "Carol",
+            "Dan",
+            "Eve",
+            "Frank",
+            "Grace",
+            "Heidi",
+            "Ivan",
+            "Judy",
+            "Mike",
+            "Niaj",
+            "Oscar",
+            "Peggy",
+            "Sybil",
+            "Ted",
+            "Trudy",
+            "Wendy"
+          ]
+        }
+      }
+    }
+  ]
+}

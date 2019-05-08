@@ -1,0 +1,9 @@
+create stream LOCATION_EVENT_STREAM  WITH (KAFKA_TOPIC='LOCATION_EVENT', VALUE_FORMAT='AVRO');
+
+create stream location_refined with (value_format='JSON') 
+as 
+select event_time
+, who
+, cast(latitude as varchar) ||','||cast(longitude as varchar) as LOCATION
+from location_event_stream;
+
