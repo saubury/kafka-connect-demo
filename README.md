@@ -1,36 +1,36 @@
 
-
+# Start Data Gen
 ```
+cd scripts
 ksql-datagen schema=./01_location_event.avro format=AVRO key=who maxInterval=5000 iterations=10000 topic=LOCATION_EVENT > /dev/null &
+```
 
+# Run KSQL
+```
+ksql
 ksql> run script '02_ksql.ksql';
+```
 
+# Load Dynamic Templates for Elastic
+```
+./04_elastic_dynamic_template
+```
 
+# Setup Kafka Connect Elastic Sink
+Write topic `LOCATION_REFINED` to Elastic
+```
+./05_set_connect
+```
+
+# Setup Kafka Connect JDBC Sink
+Write topic `LOCATION_EVENT` to Postgres
+```
+curl -k -s -S -X PUT -H "Accept: application/json" -H "Content-Type: application/json" --data @./06_sink_jdbc.json http://localhost:8083/connectors/06_sink_jdbc/config
 ```
 
 
-
+# Debug
 ```
-curl -X PUT \
-  /api/kafka-connect-1/connectors/06_sink_jdbc/config \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -d '{
-  "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
-  "connection.password": "password",
-  "auto.evolve": "true",
-  "connection.user": "postgres",
-  "tasks.max": "1",
-  "topics": "LOCATION_EVENT",
-  "auto.create": "true",
-  "connection.url": "jdbc:postgresql://postgres:5432/postgres",
-  "insert.mode": "insert"
-}'
+docker-compose -f docker-compose.yml -f docker-compose-ui.yml logs kafka-connect
 ```
 
-
-SET 'auto.offset.reset'='earliest';
-
-ksql-datagen schema=./datagen/01_location_event.avro format=AVRO key=who maxInterval=5000 iterations=10000 topic=LOCATION_EVENT
-
--33.766852,151.167412
