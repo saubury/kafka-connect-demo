@@ -1,4 +1,21 @@
 
+# Get started
+For _everything_ try
+```
+docker-compose -f docker-compose.yml -f docker-compose-ui.yml up -d
+```
+- http://localhost:5601 - Kibana
+- http://localhost:8001 - Kafka Topic Browser
+- http://localhost:8002 - Schema Registry Browser
+- http://localhost:8003 - Connect UI
+
+
+For _minimal_ setup
+```
+docker-compose -f docker-compose.yml up -d
+```
+
+
 # Start Data Gen
 ```
 cd scripts
