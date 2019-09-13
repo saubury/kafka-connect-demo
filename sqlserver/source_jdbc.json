@@ -1,0 +1,10 @@
+{
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:sqlserver://sqlserver:1433;databaseName=testDB",
+    "connection.user": "${file:/scripts/credentials.properties:MSSQL_USERNAME}",
+    "connection.password": "${file:/scripts/credentials.properties:MSSQL_PASSWORD}",
+    "topic.prefix": "mysql-01-",
+    "poll.interval.ms" : 3600000,
+    "mode":"bulk"
+}
+
